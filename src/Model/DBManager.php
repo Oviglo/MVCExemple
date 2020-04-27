@@ -60,13 +60,9 @@ abstract class DBManager
 
     public function findAll()
     {
-        $query = $this->pdo->prepare('SELECT * FROM ' . $this->tableName);
-        $query->execute();
-        $entities = [];
-        while ($entity = $query->fetchObject($this->className)) {
-            $entities[] = $entity;
-        }
-        return $entities;
+        $query = $this->pdo->query('SELECT * FROM ' . $this->tableName);
+        
+        return $query->fetchAll(PDO::FETCH_CLASS, $this->className);
     }
 
     /**
