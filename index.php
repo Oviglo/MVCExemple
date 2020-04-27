@@ -10,8 +10,11 @@ spl_autoload_register(function($className){
     }
 });
 // Init twig
-$loader = new Twig_Loader_Filesystem(__DIR__ . '/src/View');
-$twig = new Twig_Environment($loader, array('debug' => true));
+$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/src/View');
+$twig = new \Twig\Environment($loader, [
+    'cache' => __DIR__ . '/src/cache',
+    'debug' => true
+]);
 $twig->addGlobal('path', BASEPATH);
 
 use Controller\FrontController;
